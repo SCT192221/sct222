@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>申诚泰的个人主页</title>
+  <script src="https://cdn.tailwindcss.com"></script> <!-- 引入 Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet"> <!-- 引入 Font Awesome -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script> <!-- 引入 Chart.js -->
+  <link href="styles.css" rel="stylesheet"> <!-- 引入自定义样式 -->
+  <script src="script.js" defer></script> <!-- 引入自定义脚本 -->
+  <script> // 配置 Tailwind CSS
+    tailwind.config = {
+      theme: { // 自定义主题
+        extend: { // 添加自定义样式
+          colors: { // 自定义颜色
+            primary: '#165DFF', // 主色
+            secondary: '#0A2463', // 次色
+            accent: '#3E92CC', // 强调色
+            dark: '#0F172A', // 深色背景
+            light: '#F8FAFC' // 浅色背景
+          },
+          fontFamily: { // 字体
+            inter: ['Inter', 'sans-serif'], // 中文字体
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss"> /* 自定义样式 */
+    @layer utilities { /* 添加自定义样式 */
+      .content-auto { /* 内容可见性优化 */
+        content-visibility: auto;
+      }
+      .text-shadow {   /* 文字发光效果 */
+        text-shadow: 0 0 8px rgba(22, 93, 255, 0.5);
+      }
+      .bg-grid {       /* 网格背景图案 */
+        background-image: 
+          linear-gradient(rgba(22, 93, 255, 0.1) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(22, 93, 255, 0.1) 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+      .animate-float {  /* 浮动动画 */
+        animation: float 6s ease-in-out infinite;
+      }
+      .animate-pulse-slow {  /* 慢速脉冲效果 */
+        animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      .transition-transform-opacity {  /* 过渡效果 */
+        transition-property: transform, opacity;
+      }
+    }
+
+    @keyframes float {  /* 浮动动画关键帧 */
+      0% { transform: translateY(5px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(5px); }
+    }
+  </style>
+</head>
+<body class="font-inter bg-dark text-light min-h-screen overflow-x-hidden">
+  <!-- 点云背景容器 -->
+  <div id="particles-container" class="fixed inset-0 -z-10"></div>
+
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <nav class="bg-dark/80 backdrop-blur-md border-b border-primary/20 px-4 py-3">
+      <div class="container mx-auto flex justify-between items-center">
+        <a href="#home" class="text-primary font-bold text-xl tracking-wider flex items-center">
+          <span class="mr-2"><i class="fa fa-cube rotate-0"></i></span>
+          <span>申诚泰-简历</span>
+        </a>
+        
+        <!-- 移动端菜单按钮 -->
+        <button id="menu-toggle" class="lg:hidden text-light hover:text-primary transition-colors">
+          <i class="fa fa-bars text-xl"></i>
+        </button>
+        
+        <!-- 桌面端导航链接 -->
+        <ul class="hidden lg:flex space-x-8">
+          <li><a href="#home" class="nav-link text-light hover:text-primary transition-colors">首页</a></li>
+          <li><a href="#education" class="nav-link text-light hover:text-primary transition-colors">教育经历</a></li>
+          <li><a href="#research" class="nav-link text-light hover:text-primary transition-colors">研究经历</a></li>
+          <li><a href="#awards" class="nav-link text-light hover:text-primary transition-colors">荣誉奖项</a></li>
+          <li><a href="#activities" class="nav-link text-light hover:text-primary transition-colors">组织经历</a></li>
+        </ul>
+      </div>
+    </nav>
+    
+    <!-- 移动端菜单 -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-dark/95 backdrop-blur-md border-b border-primary/20">
+      <ul class="container mx-auto py-3 px-4 space-y-4">
+        <li><a href="#home" class="block text-light hover:text-primary transition-colors">首页</a></li>
+        <li><a href="#education" class="block text-light hover:text-primary transition-colors">教育经历</a></li>
+        <li><a href="#research" class="block text-light hover:text-primary transition-colors">研究经历</a></li>
+        <li><a href="#awards" class="block text-light hover:text-primary transition-colors">荣誉奖项</a></li>
+        <li><a href="#activities" class="block text-light hover:text-primary transition-colors">社团经历</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- 首页 -->
+    <section id="home" class="pt-24 pb-16 px-12 md:px-12">
+      <div class="container mx-auto">
+        <!-- 顶部区域 -->
+        <div class="flex flex-col md:flex-row items-center justify-between mb-16">
+          <div class="w-full md:w-1/4">
+            <div class="relative w-32 h-32 mx-auto md:mx-0 rounded-full overflow-hidden border-8 border-primary/20 bg-primary/10 animate-float">
+              <img src="img/哈工程1.jpg" alt="哈尔滨工程大学校徽" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-primary/20 mix-blend-overlay"></div>
+            </div>
+          </div>
+          
+          <div class="w-full md:w-2/4 text-center md:text-left mb-8 md:mb-0">
+            <h1 class="text-[clamp(2rem,5vw,3rem)] font-bold text-light mb-2 text-shadow">申诚泰</h1>
+            <p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-300">未来技术学院 | 海洋机器人 | 跨介质航行器</p>
+          </div>
+          
+          <div class="w-full md:w-1/4 mb-8 md:mb-0">
+            <img src="img/申诚泰证件照.jpg" alt="申诚泰证件照" class="h-32 md:h-40 mx-auto md:mx-0 object-contain rounded-lg border">
+          </div>
+        </div>
+        
+        <!-- 中间区域 -->
+        <div class="flex flex-col lg:flex-row items-center justify-between mb-16 gap-8">
+          <!-- 左侧个人信息 -->
+          <div class="w-full lg:w-1/2">
+            <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl p-6 shadow-lg shadow-primary/10">
+              <div class="flex flex-col space-y-8">
+                <div class="flex items-center">
+                  <div class="bg-primary/20 rounded-full p-3 mr-4 w-12 h-12 flex items-center justify-center">
+                    <i class="fa fa-user text-primary text-xl"></i>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-gray-400 text-sm mb-1">姓名</h3>
+                    <p class="text-light text-xl font-bold">申诚泰</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-center">
+                  <div class="bg-primary/20 rounded-full p-3 mr-4 w-12 h-12 flex items-center justify-center">
+                    <i class="fa fa-phone text-primary text-xl"></i>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-gray-400 text-sm mb-1">电话</h3>
+                    <p class="text-light text-xl">19373985780</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-center">
+                  <div class="bg-primary/20 rounded-full p-3 mr-4 w-12 h-12 flex items-center justify-center">
+                    <i class="fa fa-envelope text-primary text-xl"></i>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-gray-400 text-sm mb-1">邮箱</h3>
+                    <p class="text-light text-xl">shenchengtai@hrbeu.edu.cn</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-center">
+                  <div class="bg-primary/20 rounded-full p-3 mr-4 w-12 h-12 flex items-center justify-center">
+                    <i class="fa fa-users text-primary text-xl"></i>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-gray-400 text-sm mb-1">民族</h3>
+                    <p class="text-light text-xl">汉</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-center">
+                  <div class="bg-primary/20 rounded-full p-3 mr-4 w-12 h-12 flex items-center justify-center">
+                    <i class="fa fa-flag text-primary text-xl"></i>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-gray-400 text-sm mb-1">政治面貌</h3>
+                    <p class="text-light text-xl">共青团员</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 右侧雷达图 -->
+          <div class="w-full lg:w-1/2">
+            <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl p-5 shadow-lg shadow-primary/10">
+              <h2 class="text-2xl font-bold mb-1 text-center text-primary">个人能力雷达图</h2>
+              <p class="text-sm mb-4 text-center text-light/100">-_点击数据点查看详情_-</p>
+              <div class="w-full h-80 relative">
+                <canvas id="radarChart"></canvas>
+              </div>
+              
+              <!-- 雷达图展开内容容器 -->
+              <div id="radar-expand-container" class="mt-4 hidden">
+                <div id="radar-expand-content" class="bg-dark/80 p-4 rounded-xl border border-primary/20 animate-fade-in"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 底部区域 -->
+        <div class="text-center">
+          
+          <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl p-6 shadow-lg shadow-primary/10 max-w-12xl mx-auto">
+            <h2 class="text-3xl font-bold mb-8 text-light">个人简介</h2>
+            <p class="text-xl text-gray-300 leading-relaxed mb-4" style="font-family: KaiTi;">
+              申诚泰，就读于<b style="color: aqua;">哈尔滨工程大学_<a href="http://wljs.hrbeu.edu.cn/xygk1/xyjj.htm" target="_blank">未来技术学院（点击跳转官网）</a>_海洋机器人</b>专业。学习成绩学院前<b style="color: aqua;">40%</b>，截至目前获得校一等优秀奖学金<b class="text-2xl" style="color: aqua;">1</b>次、校二等优秀奖学金<b class="text-2xl" style="color: aqua;">2</b>次、校三等优秀奖学金<b class="text-2xl" style="color: aqua;">2</b>次。
+            </p>
+            <p class="text-xl text-gray-300 leading-relaxed mb-4" style="font-family: KaiTi;">
+              热衷于将理论知识应用于实际项目，研究方向主要包括<b style="color: aqua;">跨介质航行器、仿生蝴蝶、海洋机器人</b>等。目前参与了多个科研项目，获得科创类国家（国际）级奖项<b class="text-2xl" style="color: aqua;">6</b>项、省级奖项<b class="text-2xl" style="color: aqua;">6</b>项和校级奖项<b class="text-2xl" style="color: aqua;">3</b>项。
+            </p>
+            <p class="text-xl text-gray-300 leading-relaxed" style="font-family: KaiTi;">
+              擅长<b style="color: aqua;">总体设计、结构设计</b>，兼修<b style="color: aqua;">电路设计、嵌入式系统开发、前端开发和openCV图像处理</b>等。未来希望在海洋机器人领域继续深造，为我国的海洋事业贡献力量。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 教育经历 -->
+    <section id="education" class="py-16 px-4 md:px-12 bg-gradient-to-b from-dark to-dark/90">
+      <div class="container mx-auto">
+        <h2 class="text-3xl font-bold mb-12 text-center text-primary">教育经历</h2>
+        
+        <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl p-6 md:p-8 shadow-lg shadow-primary/10">
+          <div class="flex flex-col md:flex-row gap-8 items-center mb-8">
+            <div class="w-full md:w-1/3">
+              <div class="bg-primary/10 rounded-2xl p-6 text-center">
+                <img src="img/哈工程主楼.jpg" alt="哈尔滨工程大学" class="w-full h-48 object-cover rounded-lg mb-4">
+                <h3 class="text-xl font-bold text-primary mb-2">-_哈尔滨工程大学_-</h3>
+                <p class="text-gray-400">2022.09 - 至今</p>
+              </div>
+            </div>
+            
+            <div class="w-full md:w-2/3">
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="bg-primary/20 rounded-full p-2 mr-4 mt-1 w-10 h-10 flex items-center justify-center">
+                    <i class="fa fa-graduation-cap text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-xl font-bold text-light">本科</h4>
+                    <div class="text-gray-300">
+                      海洋机器人 | 未来技术学院<span class="bg-primary/15 rounded-full py-1 px-4 ml-4 mr-4 mt-1 justify-center">选拔全校1.25%组建</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="bg-primary/20 rounded-full p-2 mr-4 mt-1 w-10 h-10 flex items-center justify-center">
+                    <i class="fa fa-trophy text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-light">学校层次</h4>
+                    <span class="text-gray-300 bg-primary/15 rounded-full py px-3 ml-1 mr-1 mt-1 justify-center">211工程</span>
+                    <span class="text-gray-300 bg-primary/15 rounded-full py px-3 ml-1 mr-1 mt-1 justify-center">985优势学科建设平台</span>
+                    <span class="text-gray-300 bg-primary/15 rounded-full py px-3 ml-1 mr-1 mt-1 justify-center">双一流</span>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="bg-primary/20 rounded-full p-2 mr-4 mt-1 w-10 h-10 flex items-center justify-center">
+                    <i class="fa fa-certificate text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-light">英语能力</h4>
+                    <span class="text-gray-300 bg-primary/15 rounded-full py px-3 ml-1 mr-1 mt-1 justify-center">CET-4 ✓</span>
+                    <span class="text-gray-300 bg-primary/15 rounded-full py px-3 ml-1 mr-1 mt-1 justify-center">CET-6 ✓</span>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="bg-primary/20 rounded-full p-2 mr-4 mt-1 w-10 h-10 flex items-center justify-center">
+                    <i class="fa fa-book text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-light">专业核心课程</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                      <div class="text-sm text-gray-300 bg-primary/15 rounded-full py-1 px-3 ml-1 mr-1 mt-1 justify-center text-center">海洋机器人初级设计与实践</div>
+                      <div class="text-sm text-gray-300 bg-primary/15 rounded-full py-1 px-3 ml-1 mr-1 mt-1 justify-center text-center">海洋运载器原理与实践</div>
+                      <div class="text-sm text-gray-300 bg-primary/15 rounded-full py-1 px-3 ml-1 mr-1 mt-1 justify-center text-center">船舶与海洋工程原理</div>
+                      <div class="text-sm text-gray-300 bg-primary/15 rounded-full py-1 px-3 ml-1 mr-1 mt-1 justify-center text-center">工程系统设计</div>
+                      <div class="text-sm text-gray-300 bg-primary/15 rounded-full py-1 px-3 ml-1 mr-1 mt-1 justify-center text-center">先进机器人动力学及控制方法</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-8 border-t border-primary/20 pt-8">
+            <h3 class="text-2xl font-bold mb-6 text-light text-center">学院简介</h3>
+            <div class="bg-dark/80 rounded-xl p-6 text-gray-300 leading-relaxed">
+              <p class="text-xl mb-4" style="font-family: KaiTi;">未来技术学院是哈尔滨工程大学为响应国家"新工科"建设战略，选拔全校前<b class="text-2xl" style="color: aqua;">1.25%</b>（50/4000）的优秀学生组建的精英学院。
+              <p class="text-xl" style="font-family: KaiTi;">学院成立于2021年6月，是哈尔滨工程大学聚焦国家海洋强国战略需求，瞄准未来十至十五年智慧海洋领域未来技术创新与产业发展需要，坚持“兴趣激励、使命驱动、聚理融工、启迪智慧”的人才培养方针，按照“面向未来、价值引领、学科交叉、科教融汇”的建设理念，汇聚全校优势资源打造的创新人才培养高地，旨在培养具有扎实科学与人文素养、德智体美劳全面发展的智慧海洋领域未来科技创新<b style="color: aqua;">领军人才</b>。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 研究经历 -->
+    <section id="research" class="py-16 px-4 md:px-8 bg-dark">
+      <div class="container mx-auto">
+        <h2 class="text-3xl font-bold mb-12 text-center text-primary">研究经历</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8"> <!--启用网格布局模式-->
+          
+          <!-- 项目1：可变构潜空跨域探测航行器 -->
+          <div class="research-card group">
+            <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
+              <div class="card-header p-6 cursor-pointer flex justify-between items-center">
+                <div>
+                  <h3 class="text-xl font-bold text-light mb-2">可变构潜空跨域探测航行器</h3>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">省级大学生创新训练计划项目</span>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">项目负责人</span>
+                  <div class="flex items-center text-sm text-gray-300 mb-2">
+                    <i style="margin: 1rem 0.5rem 0 0;" class="fa fa-calendar-o text-primary mr-2"></i>
+                    <span style="margin: 1rem 0 0;">2024年07月 - 至今（已结题）</span>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-300 mb-4">
+                    <i class="fa fa-user-o text-primary mr-2"></i>
+                    <span>指导老师：陈云赛 李海波</span>
+                  </div>
+                  <p class="text-gray-300 mb-4">设计制造一种具备潜航器、四旋翼、固定翼三种形态新型跨介质飞行器</p>
+                  <div class="flex justify-center items-between">
+                    <div style="display: inline-block;" class="bg-primary/10 rounded-2xl p-4 mr-4">
+                      <h4 class="text-light font-bold mb-2">承担工作</h4>
+                      <ul class="text-gray-300 space-y-1 list-disc list-inside">
+                        <li class="text-sm">总体设计与技术验证</li>
+                        <li class="text-sm">机械设计与制造</li>
+                        <li class="text-sm">实验与各部联调</li>
+                      </ul>
+                    </div>
+                    <a href="https://docs.qq.com/slide/DWnR5dk9zTm5adndN?_bid=1&client=drive_file&electronTabTitle=%E7%9C%81%E5%88%9B%E7%BB%93%E9%A2%98%E7%AD%94%E8%BE%A9" target="_blank">
+                      <img style="display: inline-block; width: 14rem;" class="p-1 mr object-contain rounded-2xl border border-light/50" src="img/菱形盒式翼封面.png" alt="">
+                    </a>
+                  </div>
+                  <p class="text-light mt-4 ml-4 mb-2">能力体现</p>
+                  <div class="flex">
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">总体设计</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">轻量化设计</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">复杂结构设计</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">材料工艺</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 项目2：X型翼跨介质飞行平台 -->
+          <div class="research-card group">
+            <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
+              <div class="card-header p-6 cursor-pointer flex justify-between items-center">
+                <div>
+                  <h3 class="text-xl font-bold text-light mb-2">X型翼跨介质飞行平台</h3>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">省级大学生创新训练计划项目-衍生方案</span>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">独立负责人</span>
+                  <div class="flex items-center text-sm text-gray-300 mb-2">
+                    <i style="margin: 1rem 0.5rem 0 0;" class="fa fa-calendar-o text-primary mr-2"></i>
+                    <span style="margin: 1rem 0 0;">2025年05月 - 至今</span>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-300 mb-4">
+                    <i class="fa fa-user-o text-primary mr-2"></i>
+                    <span>指导老师：陈云赛</span>
+                  </div>
+                  <p class="text-gray-300 mb-4">设计制造一种基于X型翼构型的高设备复用率多模态跨介质飞行器</p>
+                  <div class="flex justify-center items-between">
+                    <div style="display: inline-block;" class="bg-primary/10 rounded-2xl p-4 mr-4">
+                      <h4 class="text-light font-bold mb-2">承担工作<small>（独立完成）</small></h4>
+                      <ul class="text-gray-300 space-y-1 list-disc list-inside">
+                        <li class="text-sm">总体设计与技术验证</li>
+                        <li class="text-sm">机械设计与制造</li>
+                        <li class="text-sm">电路设计与飞控调参</li>
+                      </ul>
+                    </div>
+                    <a href="https://docs.qq.com/slide/DWm1FWnlueU1NdGZz?electronTabTitle=X%E5%9E%8B%E7%BF%BC%E8%B7%A8%E4%BB%8B%E8%B4%A8%E9%A3%9E%E8%A1%8C%E5%B9%B3%E5%8F%B0&isOfflineNewFileFlag=true" target="_blank">
+                      <img style="display: inline-block; width: 14rem;" class="p-1 mr object-contain rounded-2xl border border-light/50" src="img/X型翼封面.png" alt="">
+                    </a>
+                  </div>
+                  <p class="text-light mt-4 ml-4 mb-2">能力体现</p>
+                  <div class="flex">
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">总体设计</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">飞行器设计</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">电路设计</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">INAV 飞控</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 项目3：仿生蝴蝶 -->
+          <div class="research-card group">
+            <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
+              <div class="card-header p-6 cursor-pointer flex justify-between items-center">
+                <div>
+                  <h3 class="text-xl font-bold text-light mb-2">仿生蝴蝶</h3>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">全国大学生机械创新设计大赛项目</span>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">项目负责人</span>
+                  <div class="flex items-center text-sm text-gray-300 mb-2">
+                    <i style="margin: 1rem 0.5rem 0 0;" class="fa fa-calendar-o text-primary mr-2"></i>
+                    <span style="margin: 1rem 0 0 0;">2023年11月 - 2024年05月</span>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-300 mb-4">
+                    <i class="fa fa-user-o text-primary mr-2"></i>
+                    <span>指导老师：李海波</span>
+                  </div>
+                  <p class="text-gray-300 mb-4">设计制作一种小翼展（30cm）低振翅频率的仿生蝴蝶（整机12g）</p>
+                  <div class="flex justify-center items-between">
+                    <div style="display: inline-block;" class="bg-primary/10 rounded-2xl p-4 mr-4">
+                      <h4 class="text-light font-bold mb-2">承担工作</h4>
+                      <ul class="text-gray-300 space-y-1 list-disc list-inside">
+                        <li class="text-sm">器件与材料选型</li>
+                        <li class="text-sm">机械设计与制造</li>
+                        <li class="text-sm">电路设计与线路连接</li>
+                      </ul>
+                    </div>
+                    <a href="https://docs.qq.com/slide/DWkt2RW1LQ1ZLVkVJ?select=ZKvEmKCVKVEI&_bid=1&client=drive_file&electronTabTitle=%E6%98%9F%E6%B2%B3%E8%9D%B6%E8%88%9E&isOfflineNewFileFlag=true" target="_blank">
+                      <img style="display: inline-block; width: 14rem;" class="p-1 mr object-contain rounded-2xl border border-light/50" src="img/仿生蝴蝶封面.png" alt="">
+                    </a>
+                  </div>
+                  <p class="text-light mt-4 ml-4 mb-2">能力体现</p>
+                  <div class="flex">
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">轻量化设计</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">传动结构</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">材料与工艺</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">电路设计</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 项目4：竞赛级水下作业机器人-凌云号 -->
+          <div class="research-card group">
+          <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
+            <div class="card-header p-6 cursor-pointer flex justify-between items-center">
+              <div>
+                <h3 class="text-xl font-bold text-light mb-2">竞赛级水下作业机器人-凌云号</h3>
+                <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">世界大学生水下机器人大赛项目</span>
+                <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">机械负责人</span>
+                <div class="flex items-center text-sm text-gray-300 mb-2">
+                  <i style="margin: 1rem 0.5rem 0 0;" class="fa fa-calendar-o text-primary mr-2"></i>
+                  <span style="margin: 1rem 0 0;">2024年03月 - 2024年07月</span>
+                </div>
+                <div class="flex items-center text-sm text-gray-300 mb-4">
+                  <i class="fa fa-user-o text-primary mr-2"></i>
+                  <span>指导老师：陈云赛 李海波 刘文智</span>
+                </div>
+                <p class="text-gray-300 mb-4">设计制造一台操控手感良好的5自由度新布局竞赛级水下作业机器人</p>
+                <div class="flex justify-center items-between">
+                  <div style="display: inline-block;" class="bg-primary/10 rounded-2xl p-4 mr-4">
+                    <h4 class="text-light font-bold mb-2">承担工作</h4>
+                    <ul class="text-gray-300 space-y-1 list-disc list-inside">
+                      <li class="text-sm">机器人结构设计</li>
+                      <li class="text-sm">多任务夹爪设计</li>
+                      <li class="text-sm">零件加工与整体组装</li>
+                    </ul>
+                  </div>
+                  <a href="https://docs.qq.com/slide/DWkt4aFhMREdETGp6?electronTabTitle=%E5%87%8C%E4%BA%91%E5%8F%B7ROV&isOfflineNewFileFlag=true" target="_blank">
+                    <img style="display: inline-block; width: 14rem;" class="p-1 mr object-contain rounded-2xl border border-light/50" src="img/凌云号封面.png" alt="">
+                  </a>
+                </div>
+                <p class="text-light mt-4 ml-4 mb-2">能力体现</p>
+                <div class="flex">
+                  <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">机械设计</span>
+                  <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">雕刻机操作</span>
+                  <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">推力矩阵</span>
+                  <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">推进器布局</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <!-- 项目5：可变布局水下作业机器人-雷霆嘎巴 -->
+          <div class="research-card group">
+            <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
+              <div class="card-header p-6 cursor-pointer flex justify-between items-center">
+                <div>
+                  <h3 class="text-xl font-bold text-light mb-2">可变布局水下作业机器人-雷霆嘎巴</h3>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">海洋机器人初级设计与实践-课程设计</span>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">机械负责人</span>
+                  <div class="flex items-center text-sm text-gray-300 mb-2">
+                    <i style="margin: 1rem 0.5rem 0 0;" class="fa fa-calendar-o text-primary mr-2"></i>
+                    <span style="margin: 1rem 0 0;">2024年07月 - 2024年07月</span>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-300 mb-4">
+                    <i class="fa fa-user-o text-primary mr-2"></i>
+                    <span>指导老师：陈云赛</span>
+                  </div>
+                  <p class="text-gray-300 mb-4">设计并制造一种低成本可变换推进器布局的小型水下作业机器人</p>
+                  <div class="flex justify-center items-between">
+                    <div style="display: inline-block;" class="bg-primary/10 rounded-2xl p-4 mr-4">
+                      <h4 class="text-light font-bold mb-2">承担工作</h4>
+                      <ul class="text-gray-300 space-y-1 list-disc list-inside">
+                        <li class="text-sm">机器人结构设计</li>
+                        <li class="text-sm">零件加工与整体组装</li>
+                        <li class="text-sm">实验与各部联调</li>
+                      </ul>
+                    </div>
+                    <a href="https://docs.qq.com/slide/DWnZvWXpXRGNESVhO?electronTabTitle=%E5%8F%AF%E5%8F%98%E5%B8%83%E5%B1%80ROV&isOfflineNewFileFlag=true" target="_blank">
+                      <img style="display: inline-block; width: 14rem;" class="p-1 mr object-contain rounded-2xl border border-light/50" src="img/雷霆嘎巴封面.png" alt="">
+                    </a>
+                  </div>
+                  <p class="text-light mt-4 ml-4 mb-2">能力体现</p>
+                  <div class="flex">
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">机械设计</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">布局设计</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">雕刻机操作</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">团队合作</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 项目6：竞赛级水下作业机器人-暗海潜鲨 -->
+          <div class="research-card group">
+            <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
+              <div class="card-header p-6 cursor-pointer flex justify-between items-center">
+                <div>
+                  <h3 class="text-xl font-bold text-light mb-2">竞赛级水下作业机器人-暗海潜鲨</h3>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">世界大学生水下机器人大赛项目</span>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">机械负责人</span>
+                  <div class="flex items-center text-sm text-gray-300 mb-2">
+                    <i style="margin: 1rem 0.5rem 0 0;" class="fa fa-calendar-o text-primary mr-2"></i>
+                    <span style="margin: 1rem 0 0;">2024年03月 - 2024年07月</span>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-300 mb-4">
+                    <i class="fa fa-user-o text-primary mr-2"></i>
+                    <span>指导老师：陈云赛</span>
+                  </div>
+                  <p class="text-gray-300 mb-4">设计并制造一台操控手感良好的 6 自由度竞赛级水下作业机器人</p>
+                  <div class="flex justify-center items-between">
+                    <div style="display: inline-block;" class="bg-primary/10 rounded-2xl p-4 mr-4">
+                      <h4 class="text-light font-bold mb-2">承担工作</h4>
+                      <ul class="text-gray-300 space-y-1 list-disc list-inside">
+                        <li class="text-sm">机器人结构设计</li>
+                        <li class="text-sm">多任务夹爪设计</li>
+                        <li class="text-sm">零件加工与整体组装</li>
+                      </ul>
+                    </div>
+                    <a href="https://docs.qq.com/slide/DWnNOQUdwQ25MRXBN?electronTabTitle=%E6%9A%97%E6%B5%B7%E6%BD%9C%E9%B2%A8ROV&isOfflineNewFileFlag=true" target="_blank">
+                      <img style="display: inline-block; width: 14rem;" class="p-1 mr object-contain rounded-2xl border border-light/50" src="img/暗海潜鲨封面.png" alt="">
+                    </a>
+                  </div>
+                  <p class="text-light mt-4 ml-4 mb-2">能力体现</p>
+                  <div class="flex">
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">机械设计</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">雕刻机操作</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">密封与防腐蚀</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">团队合作</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 项目7：水下图像处理与目标识别 -->
+          <div class="research-card group">
+            <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
+              <div class="card-header p-6 cursor-pointer flex justify-between items-center">
+                <div>
+                  <h3 class="text-xl font-bold text-light mb-2">水下图像处理与目标识别</h3>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">海洋信息场基础及应用-课程设计</span>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">独立完成人</span>
+                  <div class="flex items-center text-sm text-gray-300 mb-2">
+                    <i style="margin: 1rem 0.5rem 0 0;" class="fa fa-calendar-o text-primary mr-2"></i>
+                    <span style="margin: 1rem 0 0;">2024年08月 - 2024年11月</span>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-300 mb-4">
+                    <i class="fa fa-user-o text-primary mr-2"></i>
+                    <span>指导老师：邢向磊</span>
+                  </div>
+                  <p class="text-gray-300 mb-4">基于openCV写一个水下图像处理算法并应用yolo实现水下目标的识别</p>
+                  <div class="flex justify-center items-between">
+                    <div style="display: inline-block;" class="bg-primary/10 rounded-2xl p-4 mr-4">
+                      <h4 class="text-light font-bold mb-2">承担工作</h4>
+                      <ul class="text-gray-300 space-y-1 list-disc list-inside">
+                        <li class="text-sm">编写图像处理算法</li>
+                        <li class="text-sm">训练数据集</li>
+                        <li class="text-sm">识别水下目标</li>
+                      </ul>
+                    </div>
+                    <a href="https://docs.qq.com/slide/DWmpGUWJaYVp4SU5X?electronTabTitle=%E6%B0%B4%E4%B8%8B%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E4%B8%8E%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB&isOfflineNewFileFlag=true" target="_blank">
+                      <img style="display: inline-block; width: 14rem;" class="p-1 mr object-contain rounded-2xl border border-light/50" src="img/图像处理封面.png" alt="">
+                    </a>
+                  </div>
+                  <p class="text-light mt-4 ml-4 mb-2">能力体现</p>
+                  <div class="flex">
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">openCV</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">图像处理</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">去雾算法</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">yolo</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 项目8：交互式网页简历前端开发 -->
+          <div class="research-card group">
+            <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
+              <div class="card-header p-6 cursor-pointer flex justify-between items-center">
+                <div>
+                  <h3 class="text-xl font-bold text-light mb-2">交互式网页简历前端开发</h3>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">个人休闲娱乐项目</span>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">独立完成人</span>
+                  <div class="flex items-center text-sm text-gray-300 mb-2">
+                    <i style="margin: 1rem 0.5rem 0 0;" class="fa fa-calendar-o text-primary mr-2"></i>
+                    <span style="margin: 1rem 0 0;">2025年06月 - 2025年06月</span>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-300 mb-4">
+                    <i class="fa fa-user-o text-primary mr-2"></i>
+                    <span>指导老师：bilibili 豆包</span>
+                  </div>
+                  <p class="text-gray-300 mb-4">基于前端开发的基础知识并借助AI工具开发一个炫酷的交互式网页版个人简历</p>
+                  <div class="flex justify-center items-between">
+                    <div style="display: inline-block;" class="bg-primary/10 rounded-2xl p-4 mr-4">
+                      <h4 class="text-light font-bold mb-2">承担工作<small>（独立完成）</small></h4>
+                      <ul class="text-gray-300 space-y-1 list-disc list-inside">
+                        <li class="text-sm">用AI生成网页框架</li>
+                        <li class="text-sm">添加详细内容模块</li>
+                        <li class="text-sm">优化页面视觉效果</li>
+                      </ul>
+                    </div>
+                    <a href="https://docs.qq.com/slide/DWmVoY2hQUXhVVGJO?_bid=1&client=drive_file&electronTabTitle=%E7%9C%81%E5%88%9B%E7%BB%93%E9%A2%98%E7%AD%94%E8%BE%A9&isOfflineNewFileFlag=true" target="_blank">
+                      <img style="display: inline-block; width: 14rem;" class="p-1 mr object-contain rounded-2xl border border-light/50" src="img/前端开发封面.png" alt="">
+                    </a>
+                  </div>
+                  <p class="text-light mt-4 ml-4 mb-2">能力体现</p>
+                  <div class="flex">
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">前端设计</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">HTML</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">CSS</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">JavaScript</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 项目9：红外追踪小船 -->
+          <div class="research-card group">
+            <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
+              <div class="card-header p-6 cursor-pointer flex justify-between items-center">
+                <div>
+                  <h3 class="text-xl font-bold text-light mb-2">红外追踪小船</h3>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">全国大学生海洋航行器设计与制作大赛项目</span>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">机械负责人</span>
+                  <div class="flex items-center text-sm text-gray-300 mb-2">
+                    <i style="margin: 1rem 0.5rem 0 0;" class="fa fa-calendar-o text-primary mr-2"></i>
+                    <span style="margin: 1rem 0 0;">2023年06月 - 2023年08月</span>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-300 mb-4">
+                    <i class="fa fa-user-o text-primary mr-2"></i>
+                    <span>指导老师：孙延超 徐岩</span>
+                  </div>
+                  <p class="text-gray-300 mb-4">设计并制作一搜可以稳定快速行驶并自动穿越发射红外信号的光电门的小船</p>
+                  <div class="flex justify-center items-between">
+                    <div style="display: inline-block;" class="bg-primary/10 rounded-2xl p-4 mr-4">
+                      <h4 class="text-light font-bold mb-2">承担工作</h4>
+                      <ul class="text-gray-300 space-y-1 list-disc list-inside">
+                        <li class="text-sm">设计小船外形与结构</li>
+                        <li class="text-sm">实验与各部分联调</li>
+                        <li class="text-sm">绘制船舶型线图</li>
+                      </ul>
+                    </div>
+                    <a href="https://docs.qq.com/slide/DWmpDc2t3RWJ2enNq?electronTabTitle=%E7%BA%A2%E5%A4%96%E8%BF%BD%E8%B8%AA%E5%B0%8F%E8%88%B9&isOfflineNewFileFlag=true" target="_blank">
+                      <img style="display: inline-block; width: 14rem;" class="p-1 mr object-contain rounded-2xl border border-light/50" src="img/红外追踪小船封面.png" alt="">
+                    </a>
+                  </div>
+                  <p class="text-light mt-4 ml-4 mb-2">能力体现</p>
+                  <div class="flex">
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">船舶设计</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">团队协作</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">三维建模</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">SolidWorks</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 项目10：悟空号全海深AUV模型 -->
+          <div class="research-card group">
+            <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
+              <div class="card-header p-6 cursor-pointer flex justify-between items-center">
+                <div>
+                  <h3 class="text-xl font-bold text-light mb-2">悟空号全海深AUV1:2模型</h3>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">全国大学生海洋航行器设计与制作大赛项目</span>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">项目负责人</span>
+                  <div class="flex items-center text-sm text-gray-300 mb-2">
+                    <i style="margin: 1rem 0.5rem 0 0;" class="fa fa-calendar-o text-primary mr-2"></i>
+                    <span style="margin: 1rem 0 0;">2023年06月 - 2023年08月</span>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-300 mb-4">
+                    <i class="fa fa-user-o text-primary mr-2"></i>
+                    <span>指导老师：孙延超 徐岩</span>
+                  </div>
+                  <p class="text-gray-300 mb-4">建模并以纸为原材料手工制作一个精美的悟空号全海深AUV1:2模型</p>
+                  <div class="flex justify-center items-between">
+                    <div style="display: inline-block;" class="bg-primary/10 rounded-2xl p-4 mr-4">
+                      <h4 class="text-light font-bold mb-2">承担工作</h4>
+                      <ul class="text-gray-300 space-y-1 list-disc list-inside">
+                        <li class="text-sm">悟空号精细建模</li>
+                        <li class="text-sm">材料选择与制作</li>
+                        <li class="text-sm">答辩与路演</li>
+                      </ul>
+                    </div>
+                    <a href="https://docs.qq.com/slide/DWnhFVmxKdkpyYUV3?electronTabTitle=%E6%82%9F%E7%A9%BA%E5%8F%B7%E5%85%A8%E6%B5%B7%E6%B7%B1AUV%E6%A8%A1%E5%9E%8B&isOfflineNewFileFlag=true" target="_blank">
+                      <img style="display: inline-block; width: 14rem;" class="p-1 mr object-contain rounded-2xl border border-light/50" src="img/悟空号封面.png" alt="">
+                    </a>
+                  </div>
+                  <p class="text-light mt-4 ml-4 mb-2">能力体现</p>
+                  <div class="flex">
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">三维建模</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">动手能力</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">模型制作</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">SolidWorks</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 项目11：遥控物流小车 -->
+          <div class="research-card group">
+            <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
+              <div class="card-header p-6 cursor-pointer flex justify-between items-center">
+                <div>
+                  <h3 class="text-xl font-bold text-light mb-2">遥控物流小车</h3>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">工程系统设计-课程设计</span>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">项目负责人</span>
+                  <div class="flex items-center text-sm text-gray-300 mb-2">
+                    <i style="margin: 1rem 0.5rem 0 0;" class="fa fa-calendar-o text-primary mr-2"></i>
+                    <span style="margin: 1rem 0 0;">2023年11月 - 2023年12月</span>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-300 mb-4">
+                    <i class="fa fa-user-o text-primary mr-2"></i>
+                    <span>指导老师：商振</span>
+                  </div>
+                  <p class="text-gray-300 mb-4">设计并制作一种高效灵活的物流小车</p>
+                  <div class="flex justify-center items-between">
+                    <div style="display: inline-block;" class="bg-primary/10 rounded-2xl p-4 mr-4">
+                      <h4 class="text-light font-bold mb-2">承担工作</h4>
+                      <ul class="text-gray-300 space-y-1 list-disc list-inside">
+                        <li class="text-sm">小车设计与建模</li>
+                        <li class="text-sm">PCB绘制与焊接</li>
+                        <li class="text-sm">零件加工与组装</li>
+                      </ul>
+                    </div>
+                    <a href="https://docs.qq.com/pdf/DWmRzUEhGdm5wdnBB?electronTabTitle=%E8%AE%BE%E8%AE%A1%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A" target="_blank">
+                      <img style="display: inline-block; width: 14rem;" class="p-1 mr object-contain rounded-2xl border border-light/50" src="img/物流小车封面.png" alt="">
+                    </a>
+                  </div>
+                  <p class="text-light mt-4 ml-4 mb-2">能力体现</p>
+                  <div class="flex">
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">机械设计</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">电路设计</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">PCB绘制</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">团队协作</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 项目12：智能物流机器人 -->
+          <div class="research-card group">
+            <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
+              <div class="card-header p-6 cursor-pointer flex justify-between items-center">
+                <div>
+                  <h3 class="text-xl font-bold text-light mb-2">智能物流机器人</h3>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">工程系统设计-课程设计</span>
+                  <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center">项目负责人</span>
+                  <div class="flex items-center text-sm text-gray-300 mb-2">
+                    <i style="margin: 1rem 0.5rem 0 0;" class="fa fa-calendar-o text-primary mr-2"></i>
+                    <span style="margin: 1rem 0 0;">2023年1月 - 2023年4月</span>
+                  </div>
+                  <div class="flex items-center text-sm text-gray-300 mb-4">
+                    <i class="fa fa-user-o text-primary mr-2"></i>
+                    <span>指导老师：E唯协会</span>
+                  </div>
+                  <p class="text-gray-300 mb-4">设计并制作一种可循迹和高效作业的物流机器人</p>
+                  <div class="flex justify-center items-between">
+                    <div style="display: inline-block;" class="bg-primary/10 rounded-2xl p-4 mr-4">
+                      <h4 class="text-light font-bold mb-2">承担工作</h4>
+                      <ul class="text-gray-300 space-y-1 list-disc list-inside">
+                        <li class="text-sm">小车设计与建模</li>
+                        <li class="text-sm">零件加工与组装</li>
+                        <li class="text-sm">实验与各部联调</li>
+                      </ul>
+                    </div>
+                    <a href="https://docs.qq.com/slide/DWmFmRkZ3R1RPd0dw?electronTabTitle=%E6%99%BA%E8%83%BD%E7%89%A9%E6%B5%81%E6%9C%BA%E5%99%A8%E4%BA%BA&isOfflineNewFileFlag=true" target="_blank">
+                      <img style="display: inline-block; width: 14rem;" class="p-1 mr object-contain rounded-2xl border border-light/50" src="img/物流机器人封面.png" alt="物流机器人封面">
+                    </a>
+                  </div>
+                  <p class="text-light mt-4 ml-4 mb-2">能力体现</p>
+                  <div class="flex">
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">机械设计</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">作业流程</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">三维建模</span>
+                    <span class="text-xs bg-primary/15 rounded-full py-1 px-4 ml-2 mr-2 mt-1 justify-center">团队协作</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section> 
+    
+    <!-- 荣誉奖项 -->
+    <section id="awards" class="py-16 px-4 md:px-8 bg-gradient-to-b from-dark/90 to-dark">
+      <div class="container mx-auto">
+        <h2 class="text-3xl font-bold mb-12 text-center text-primary">荣誉奖项</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- 学业荣誉 -->
+          <div>
+            <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10">
+              <div class="bg-primary/20 p-6">
+                <h3 class="text-xl font-bold text-light flex items-center justify-between">
+                  <span>
+                    <i class="fa fa-book text-primary mr-2"></i>
+                    学业荣誉
+                  </span>
+                  <span class="mr-2">
+                    共计<i style="font-size: xx-large; color: aqua;">7</i> 项
+                  </span>
+                </h3>
+              </div>
+              <div class="p-6">
+                <div class="space-y-4">
+                  <a class="award-item group cursor-pointer" href="https://docs.qq.com/doc/DWnhzYXF0aUp5b3ZK?electronTabTitle=%E5%AD%A6%E4%B8%9A%E7%B1%BB%E8%8D%A3%E8%AA%89%E8%AF%81%E4%B9%A6%E5%90%88%E9%9B%86" target="_blank">
+                    <div class="bg-dark/80 rounded-xl p-4 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                      <div>
+                        <h4 class="text-light font-bold">校一等优秀学生奖学金</h4>
+                        <p class="text-gray-400 text-sm">2024-6</p>
+                      </div>
+                      <i class="fa fa-trophy text-primary"></i>
+                    </div>
+                  </a>
+                  
+                  <a class="award-item group cursor-pointer" href="https://docs.qq.com/doc/DWnhzYXF0aUp5b3ZK?electronTabTitle=%E5%AD%A6%E4%B8%9A%E7%B1%BB%E8%8D%A3%E8%AA%89%E8%AF%81%E4%B9%A6%E5%90%88%E9%9B%86" target="_blank">
+                    <div class="bg-dark/80 rounded-xl p-4 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                      <div>
+                        <h4 class="text-light font-bold">校二等优秀学生奖学金</h4>
+                        <p class="text-gray-400 text-sm">2023-10, 2025-3</p>
+                      </div>
+                      <i class="fa fa-trophy text-primary"></i>
+                    </div>
+                  </a>
+                  
+                  <a class="award-item group cursor-pointer" href="https://docs.qq.com/doc/DWnhzYXF0aUp5b3ZK?electronTabTitle=%E5%AD%A6%E4%B8%9A%E7%B1%BB%E8%8D%A3%E8%AA%89%E8%AF%81%E4%B9%A6%E5%90%88%E9%9B%86" target="_blank">
+                    <div class="bg-dark/80 rounded-xl p-4 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                      <div>
+                        <h4 class="text-light font-bold">校三等优秀学生奖学金</h4>
+                        <p class="text-gray-400 text-sm">2023-5, 2024-10</p>
+                      </div>
+                      <i class="fa fa-trophy text-primary"></i>
+                    </div>
+                  </a>
+                  
+                  <a class="award-item group cursor-pointer" href="https://docs.qq.com/doc/DWnhzYXF0aUp5b3ZK?electronTabTitle=%E5%AD%A6%E4%B8%9A%E7%B1%BB%E8%8D%A3%E8%AA%89%E8%AF%81%E4%B9%A6%E5%90%88%E9%9B%86" target="_blank">
+                    <div class="bg-dark/80 rounded-xl p-4 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                      <div>
+                        <h4 class="text-light font-bold">优秀寝室</h4>
+                        <p class="text-gray-400 text-sm">2024-1</p>
+                      </div>
+                      <i class="fa fa-trophy text-primary"></i>
+                    </div>
+                  </a>
+
+                  <a class="award-item group cursor-pointer" href="https://mp.weixin.qq.com/s/7bUSiPbWoHVdFKAaq4vsTA" target="_blank">
+                    <div class="bg-dark/80 rounded-xl p-4 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                      <div>
+                        <h4 class="text-light font-bold">未来技术学院“聚理融工”案例征集二等奖</h4>
+                        <p class="text-gray-400 text-sm">2025-5</p>
+                      </div>
+                      <i class="fa fa-trophy text-primary"></i>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10 mt-8">
+              <div class="bg-primary/20 p-6">
+                <h3 class="text-xl font-bold text-light flex items-center justify-between">
+                  <span>
+                    <i class="fa fa-book text-primary mr-2"></i>
+                    其他荣誉
+                  </span>
+                </h3>
+              </div>
+              <div class="p-6">
+                <div class="space-y-4">
+                  <a class="award-item group cursor-pointer p-4" href="https://mp.weixin.qq.com/s/rxzTgTzukBib5HIQwviNvA" target="_blank">
+                    <div class="bg-dark/80 rounded-xl p-3 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                      <div>
+                        <h4 class="text-light font-bold">第61届高等教育博览会</h4>
+                        <p class="text-gray-400 text-sm">2024-4</p>
+                      </div>
+                      <i class="fa fa-trophy text-primary"></i>
+                    </div>
+                  </a>
+                  
+                  <a class="award-item group cursor-pointer p-4" href="https://app.kjrb.com.cn/app/template/displayTemplate/news/newsDetail/149935.html?isDigital=true&isShare=true&xyt=1746759163093" target="_blank">
+                    <div class="bg-dark/80 rounded-xl p-3 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                      <div>
+                        <h4 class="text-light font-bold">科技日报</h4>
+                        <p class="text-gray-400 text-sm">2025-5</p>
+                      </div>
+                      <i class="fa fa-trophy text-primary"></i>
+                    </div>
+                  </a>
+                  
+                  <a class="award-item group cursor-pointer p-4" href="https://mp.weixin.qq.com/s/YYRabbsuJYPCJxWGYFymng" target="_blank">
+                    <div class="bg-dark/80 rounded-xl p-3 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                      <div>
+                        <h4 class="text-light font-bold">世界航海装备大会</h4>
+                        <p class="text-gray-400 text-sm">2023-10</p>
+                      </div>
+                      <i class="fa fa-trophy text-primary"></i>
+                    </div>
+                  </a>
+                  
+                  <a class="award-item group cursor-pointer p-4" href="http://qihang.hrbeu.edu.cn/2023/1126/c958a319529/page.htm" target="_blank">
+                    <div class="bg-dark/80 rounded-xl p-3 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                      <div>
+                        <h4 class="text-light font-bold">启航网</h4>
+                        <p class="text-gray-400 text-sm">2023-11</p>
+                      </div>
+                      <i class="fa fa-trophy text-primary"></i>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+          <!-- 科创荣誉 -->
+          <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10">
+            <div class="bg-primary/20 p-6">
+              <h3 class="text-xl font-bold text-light flex items-center justify-between">
+                <span>
+                  <i class="fa fa-flask text-primary mr-2"></i>
+                  科创荣誉
+                </span>
+                <span class="mr-2">
+                  共计<i style="font-size: xx-large; color: aqua;">15</i> 项
+                </span>
+              </h3>
+            </div>
+            <div class="p-6">
+              <div class="space-y-4">
+                <a class="award-item group cursor-pointer" href="https://docs.qq.com/doc/DWkdLd3pYeG1NSnV4?electronTabTitle=%E7%A7%91%E5%88%9B%E7%B1%BB%E8%8D%A3%E8%AA%89%E8%AF%81%E4%B9%A6%E5%90%88%E9%9B%86" target="_blank">
+                  <div class="bg-dark/80 rounded-xl p-4 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                    <div>
+                      <h4 class="text-light font-bold">世界大学生水下机器人大赛（ROV赛道）</h4>
+                      <p class="text-gray-400 text-sm">国际二等奖 | 2024-8</p>
+                    </div>
+                    <i class="fa fa-trophy text-yellow-400"></i>
+                  </div>
+                </a>
+                
+                <a class="award-item group cursor-pointer" href="https://docs.qq.com/doc/DWkdLd3pYeG1NSnV4?electronTabTitle=%E7%A7%91%E5%88%9B%E7%B1%BB%E8%8D%A3%E8%AA%89%E8%AF%81%E4%B9%A6%E5%90%88%E9%9B%86" target="_blank">
+                  <div class="bg-dark/80 rounded-xl p-4 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                    <div>
+                      <h4 class="text-light font-bold">世界大学生水下机器人大赛（创意赛道）</h4>
+                      <p class="text-gray-400 text-sm">国际二等奖 | 2024-8</p>
+                    </div>
+                    <i class="fa fa-trophy text-yellow-400"></i>
+                  </div>
+                </a>
+                
+                <a class="award-item group cursor-pointer" href="https://docs.qq.com/doc/DWkdLd3pYeG1NSnV4?electronTabTitle=%E7%A7%91%E5%88%9B%E7%B1%BB%E8%8D%A3%E8%AA%89%E8%AF%81%E4%B9%A6%E5%90%88%E9%9B%86" target="_blank">
+                  <div class="bg-dark/80 rounded-xl p-4 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                    <div>
+                      <h4 class="text-light font-bold">中国国际大学生创新大赛</h4>
+                      <p class="text-gray-400 text-sm">省级银奖 | 2024-7</p>
+                    </div>
+                    <i class="fa fa-trophy text-yellow-400"></i>
+                  </div>
+                </a>
+                
+                <a class="award-item group cursor-pointer" href="https://docs.qq.com/doc/DWkdLd3pYeG1NSnV4?electronTabTitle=%E7%A7%91%E5%88%9B%E7%B1%BB%E8%8D%A3%E8%AA%89%E8%AF%81%E4%B9%A6%E5%90%88%E9%9B%86" target="_blank">
+                  <div class="bg-dark/80 rounded-xl p-4 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                    <div>
+                      <h4 class="text-light font-bold">中国机器人大赛（ROV赛道）</h4>
+                      <p class="text-gray-400 text-sm">国家二等奖 | 2023-10</p>
+                    </div>
+                    <i class="fa fa-trophy text-yellow-400"></i>
+                  </div>
+                </a>
+                
+                <a class="award-item group cursor-pointer" href="https://docs.qq.com/doc/DWkdLd3pYeG1NSnV4?electronTabTitle=%E7%A7%91%E5%88%9B%E7%B1%BB%E8%8D%A3%E8%AA%89%E8%AF%81%E4%B9%A6%E5%90%88%E9%9B%86" target="_blank">
+                  <div class="bg-dark/80 rounded-xl p-4 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                    <div>
+                      <h4 class="text-light font-bold">第十二届全国海洋航行器设计与制作大赛(C1-1)</h4>
+                      <p class="text-gray-400 text-sm">国家一等奖 | 2023-8 | 省级一等奖 | 2023-7</p>
+                    </div>
+                    <i class="fa fa-trophy text-yellow-400"></i>
+                  </div>
+                </a>
+
+                <a class="award-item group cursor-pointer" href="https://docs.qq.com/doc/DWkdLd3pYeG1NSnV4?electronTabTitle=%E7%A7%91%E5%88%9B%E7%B1%BB%E8%8D%A3%E8%AA%89%E8%AF%81%E4%B9%A6%E5%90%88%E9%9B%86" target="_blank">
+                  <div class="bg-dark/80 rounded-xl p-4 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                    <div>
+                      <h4 class="text-light font-bold">第十二届全国海洋航行器设计与制作大赛(D2)</h4>
+                      <p class="text-gray-400 text-sm">国家二等奖 | 2023-8 | 省级一等奖 | 2023-7</p>
+                    </div>
+                    <i class="fa fa-trophy text-yellow-400"></i>
+                  </div>
+                </a>
+
+                <a class="award-item group cursor-pointer" href="https://docs.qq.com/doc/DWkdLd3pYeG1NSnV4?electronTabTitle=%E7%A7%91%E5%88%9B%E7%B1%BB%E8%8D%A3%E8%AA%89%E8%AF%81%E4%B9%A6%E5%90%88%E9%9B%86" target="_blank">
+                  <div class="bg-dark/80 rounded-xl p-4 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                    <div>
+                      <h4 class="text-light font-bold">第十三届全国海洋航行器设计与制作大赛(B2-1)</h4>
+                      <p class="text-gray-400 text-sm">国家二等奖 | 2024-8 | 省级一等奖 | 2024-7</p>
+                    </div>
+                    <i class="fa fa-trophy text-yellow-400"></i>
+                  </div>
+                </a>
+
+                <a class="award-item group cursor-pointer" href="https://docs.qq.com/doc/DWkdLd3pYeG1NSnV4?electronTabTitle=%E7%A7%91%E5%88%9B%E7%B1%BB%E8%8D%A3%E8%AA%89%E8%AF%81%E4%B9%A6%E5%90%88%E9%9B%86" target="_blank">
+                  <div class="bg-dark/80 rounded-xl p-4 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                    <div>
+                      <h4 class="text-light font-bold">中国大学生工程实践与创新能力大赛</h4>
+                      <p class="text-gray-400 text-sm">省级特等奖 | 2023-10</p>
+                    </div>
+                    <i class="fa fa-trophy text-yellow-400"></i>
+                  </div>
+                </a>
+
+                <a class="award-item group cursor-pointer" href="https://docs.qq.com/doc/DWkdLd3pYeG1NSnV4?electronTabTitle=%E7%A7%91%E5%88%9B%E7%B1%BB%E8%8D%A3%E8%AA%89%E8%AF%81%E4%B9%A6%E5%90%88%E9%9B%86" target="_blank">
+                  <div class="bg-dark/80 rounded-xl p-4 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                    <div>
+                      <h4 class="text-light font-bold">第十一届全国大学生机械创新设计大赛</h4>
+                      <p class="text-gray-400 text-sm">省级二等奖 | 2024-5</p>
+                    </div>
+                    <i class="fa fa-trophy text-yellow-400"></i>
+                  </div>
+                </a>
+
+                <a class="award-item group cursor-pointer" href="https://docs.qq.com/doc/DWkdLd3pYeG1NSnV4?electronTabTitle=%E7%A7%91%E5%88%9B%E7%B1%BB%E8%8D%A3%E8%AA%89%E8%AF%81%E4%B9%A6%E5%90%88%E9%9B%86" target="_blank">
+                  <div class="bg-dark/80 rounded-xl p-4 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                    <div>
+                      <h4 class="text-light font-bold">第十一届物理仪器创新设计大赛</h4>
+                      <p class="text-gray-400 text-sm">校级二等奖 | 2023-10</p>
+                    </div>
+                    <i class="fa fa-trophy text-yellow-400"></i>
+                  </div>
+                </a>
+
+                <a class="award-item group cursor-pointer" href="https://docs.qq.com/doc/DWkdLd3pYeG1NSnV4?electronTabTitle=%E7%A7%91%E5%88%9B%E7%B1%BB%E8%8D%A3%E8%AA%89%E8%AF%81%E4%B9%A6%E5%90%88%E9%9B%86" target="_blank">
+                  <div class="bg-dark/80 rounded-xl p-4 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                    <div>
+                      <h4 class="text-light font-bold">第七届“E唯杯”机器人竞赛</h4>
+                      <p class="text-gray-400 text-sm">校级二等奖 | 2023-4</p>
+                    </div>
+                    <i class="fa fa-trophy text-yellow-400"></i>
+                  </div>
+                </a>
+
+                <a class="award-item group cursor-pointer" href="https://docs.qq.com/doc/DWkdLd3pYeG1NSnV4?electronTabTitle=%E7%A7%91%E5%88%9B%E7%B1%BB%E8%8D%A3%E8%AA%89%E8%AF%81%E4%B9%A6%E5%90%88%E9%9B%86" target="_blank">
+                  <div class="bg-dark/80 rounded-xl p-4 flex justify-between items-center transition-all duration-300 hover:bg-primary/10">
+                    <div>
+                      <h4 class="text-light font-bold">2024年“五四杯”大学生创新创业竞赛</h4>
+                      <p class="text-gray-400 text-sm">校级二等奖 | 2024-12</p>
+                    </div>
+                    <i class="fa fa-trophy text-yellow-400"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 组织经历 -->
+    <section id="activities" class="py-16 px-4 md:px-8 bg-dark">
+      <div class="container mx-auto">
+        <h2 class="text-3xl font-bold mb-12 text-center text-primary">社团与组织经历</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- 经历1：E唯科技协会 -->
+          <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10 group hover:shadow-xl hover:shadow-primary/20 transition-all duration-300">
+            <div class="relative">
+              <img src="img/E唯协会.png" alt="E唯科技协会" class="w-full h-32 object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+              <div class="absolute bottom-4 left-4 right-4">
+                <h3 class="text-xl font-bold text-light">哈工程E唯科技协会</h3><br>
+                <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center border border-primary/30">机械部部长</span>
+                <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center border border-primary/30">2023.05 - 至今</span>
+              </div>
+            </div>
+            <div class="p-6">
+              <ul class="text-gray-300 space-y-2 list-disc list-inside">
+                <li>负责水下机器人机械设计与制造</li>
+                <li>参加协会的水下机器人相关竞赛</li>
+                <li>培训、考核与选拔下届协会成员</li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- 经历2：未来技术学院科创委员 -->
+          <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10 group hover:shadow-xl hover:shadow-primary/20 transition-all duration-300">
+            <div class="relative">
+              <img src="img/未来技术学院.png" alt="未来技术学院" class="w-full h-32 object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+              <div class="absolute bottom-4 left-4 right-4">
+                <h3 class="text-xl font-bold text-light">未来技术学院2班</h3><br>
+                <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center border border-primary/30">科创委员</span>
+                <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center border border-primary/30">2024.04 - 至今</span>
+              </div>
+            </div>
+            <div class="p-6">
+              <ul class="text-gray-300 space-y-2 list-disc list-inside">
+                <li>及时传达科创竞赛与活动通知</li>
+                <li>为学弟学妹提供科创经验指导</li>
+                <li>收集和整理同学们的科创成果</li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- 经历3：工学书院羽毛球俱乐部 -->
+          <div class="bg-dark/60 backdrop-blur-sm border border-primary/30 rounded-2xl overflow-hidden shadow-lg shadow-primary/10 group hover:shadow-xl hover:shadow-primary/20 transition-all duration-300">
+            <div class="relative">
+              <img src="img/羽毛球.png" alt="工学书院羽毛球俱乐部" class="w-full h-32 object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+              <div class="absolute bottom-4 left-4 right-4">
+                <h3 class="text-xl font-bold text-light">工学书院羽毛球俱乐部</h3><br>
+                <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center border border-primary/30">负责人</span>
+                <span class="text-sm bg-primary/15 rounded-full py-1 px-4 ml mr-2 mt-1 justify-center border border-primary/30">2023.09 - 2024.09</span>
+              </div>
+            </div>
+            <div class="p-6">
+              <ul class="text-gray-300 space-y-2 list-disc list-inside">
+                <li>每周组织院内羽毛球活动</li>
+                <li>与羽毛球教练协调指导时间</li>
+                <li>任期内活动参与人次<b style="color: aqua;">300+</b></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark/80 backdrop-blur-md border-t border-primary/20 py-8 px-4">
+    <div class="container mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <h2 class="text-xl font-bold text-primary mb-2">申诚泰</h2>
+          <p class="text-gray-400">海洋机器人 | 未来技术学院 | 跨介质航行器</p>
+        </div>
+        
+        <div class="flex space-x-6 mb-6 md:mb-0">
+          <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+            <i class="fa fa-envelope text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+            <i class="fa fa-github text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+            <i class="fa fa-linkedin text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+            <i class="fa fa-weixin text-xl"></i>
+          </a>
+        </div>
+        
+        <div>
+          <p class="text-gray-500 text-sm">© 2025 申诚泰. 保留所有权利.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 模态框 -->
+  <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center bg-dark/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="bg-dark border border-primary/30 rounded-2xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300">
+      <div class="flex justify-between items-center mb-4">
+        <h3 id="modal-title" class="text-xl font-bold text-light"></h3>
+        <button id="close-modal" class="text-gray-400 hover:text-light transition-colors">
+          <i class="fa fa-times text-xl"></i>
+        </button>
+      </div>
+      <div id="modal-content" class="text-gray-300"></div>
+    </div>
+  </div>
+</body>
+</html>
+    

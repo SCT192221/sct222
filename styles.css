@@ -1,0 +1,91 @@
+/* 点云背景样式 */
+#particles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* 导航栏滚动效果 */
+#navbar.scrolled {
+  background-color: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 4px 30px rgba(22, 93, 255, 0.1);
+}
+
+/* 平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 雷达图样式 */
+#radarChart {
+  max-height: 300px;
+}
+
+/* 研究经历卡片动画 */
+.research-card .card-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+}
+
+.research-card.active .card-content {
+  max-height: 1000px;
+  transition: max-height 0.5s ease-in;
+}
+
+.research-card.active .fa-chevron-down {
+  transform: rotate(180deg);
+}
+
+/* 荣誉奖项卡片动画 */
+.award-item .award-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.award-item.active .award-details {
+  max-height: 300px;
+  transition: max-height 0.3s ease-in;
+}
+
+/* 模态框动画 */
+#modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#modal.active .bg-dark {
+  transform: scale(1);
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(22, 93, 255, 0.5);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(22, 93, 255, 0.8);
+}
+
+    

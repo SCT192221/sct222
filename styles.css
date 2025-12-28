@@ -1,91 +1,155 @@
-/* 点云背景样式 */
-#particles-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+/* --- 基础样式 --- */
+body {
+    background-color: #020617;
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.08), transparent 25%);
+    margin: 0;
+    font-family: 'Inter', sans-serif;
 }
 
-.particle {
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  pointer-events: none;
+.glass-panel {
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 导航栏滚动效果 */
-#navbar.scrolled {
-  background-color: rgba(15, 23, 42, 0.95);
-  box-shadow: 0 4px 30px rgba(22, 93, 255, 0.1);
+/* --- 标题美化优化 --- */
+.section-header-container {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+    padding-top: 1rem;
 }
 
-/* 平滑滚动 */
-html {
-  scroll-behavior: smooth;
+.section-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #f8fafc;
+    position: relative;
+    display: inline-block;
+    letter-spacing: 0.1em;
+    z-index: 10;
+    margin: 0;
+    background: linear-gradient(135deg, #fff 30%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-/* 雷达图样式 */
-#radarChart {
-  max-height: 300px;
+.section-subtitle {
+    display: block;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.875rem;
+    color: #06b6d4;
+    margin-top: 0.5rem;
+    letter-spacing: 0.2em;
+    opacity: 0.8;
+    text-transform: uppercase;
 }
 
-/* 研究经历卡片动画 */
-.research-card .card-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease-out;
+/* 标题装饰线 */
+.section-line {
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #3B82F6, #06b6d4);
+    margin: 1rem auto 0;
+    border-radius: 4px;
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
+    position: relative;
 }
 
-.research-card.active .card-content {
-  max-height: 1000px;
-  transition: max-height 0.5s ease-in;
+@media (min-width: 768px) {
+    .section-title { font-size: 3rem; }
+    .section-subtitle { font-size: 1rem; }
 }
 
-.research-card.active .fa-chevron-down {
-  transform: rotate(180deg);
+/* --- 标签与细节 --- */
+.skill-tag {
+    font-size: 10px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;
+    padding: 4px 10px; border-radius: 99px; /* 圆角胶囊状 */
+    background-color: rgba(255, 255, 255, 0.03); color: #9ca3af;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+}
+.skill-tag:hover { border-color: rgba(6, 182, 212, 0.5); color: #06b6d4; background-color: rgba(6, 182, 212, 0.1); }
+
+.tag {
+    font-size: 0.75rem; padding: 2px 8px; border-radius: 0.375rem;
+    border: 1px solid rgba(255, 255, 255, 0.2); color: #d1d5db;
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* 荣誉奖项卡片动画 */
-.award-item .award-details {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
+/* 滚动条美化 */
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(6, 182, 212, 0.3); border-radius: 2px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(6, 182, 212, 0.6); }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #020617; }
+::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; border: 1px solid #020617; }
+::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
+
+.reveal-on-scroll { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* --- 社交图标 --- */
+.icon-white {
+    filter: brightness(0) invert(1);
+}
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+#typing-text::after {
+    content: ''; width: 2px; height: 1em; background-color: #06b6d4;
+    display: inline-block; vertical-align: sub; margin-left: 2px;
+    animation: blink 1s step-end infinite;
 }
 
-.award-item.active .award-details {
-  max-height: 300px;
-  transition: max-height 0.3s ease-in;
+/* 模态框通用 */
+#modal.active { opacity: 1; pointer-events: auto; }
+#modal.active .bg-gray-900 { transform: scale(1); }
+
+/* --- 项目详情页样式 --- */
+#project-detail-view {
+    position: fixed; inset: 0; z-index: 100;
+    background-color: #020617;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding-top: 80px;
+}
+#project-detail-view.active { transform: translateX(0); }
+
+.back-nav {
+    position: fixed; top: 0; left: 0; right: 0; height: 70px;
+    background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    z-index: 110; display: flex; align-items: center; padding: 0 2rem;
 }
 
-/* 模态框动画 */
-#modal.active {
-  opacity: 1;
-  pointer-events: auto;
+.video-container {
+    width: 100%; aspect-ratio: 16 / 9; background-color: #0f172a;
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    border: 1px dashed rgba(6, 182, 212, 0.3); margin-bottom: 2rem; overflow: hidden; position: relative;
+}
+.video-placeholder-text {
+    color: rgba(255, 255, 255, 0.3); font-family: monospace;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
 }
 
-#modal.active .bg-dark {
-  transform: scale(1);
+.project-image-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;
 }
-
-/* 自定义滚动条 */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+.project-image-grid img {
+    width: 100%; height: 200px; object-fit: cover; border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1); transition: transform 0.3s;
 }
+.project-image-grid img:hover { transform: scale(1.02); border-color: rgba(6, 182, 212, 0.5); }
 
-::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.5);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(22, 93, 255, 0.5);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(22, 93, 255, 0.8);
-}
-
-    
+body.modal-open { overflow: hidden; }
